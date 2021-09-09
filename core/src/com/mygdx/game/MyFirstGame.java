@@ -10,6 +10,6 @@ import com.mygdx.game.screen.MenuScreen;
 public class MyFirstGame extends Game {
     @Override
     public void create() {
-        setScreen(new MenuScreen());
+        setScreen(new MenuScreen(this));
     }
 }

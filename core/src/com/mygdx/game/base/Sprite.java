@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 
 import com.mygdx.game.math.Rect;
 
-
 public class Sprite extends Rect {
 
     protected float angle;
