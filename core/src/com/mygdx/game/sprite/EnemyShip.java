@@ -10,6 +10,9 @@ import com.mygdx.game.pool.BulletPool;
 
 public class EnemyShip extends Ship {
 
+    private static final Vector2 startV = new Vector2(0, -0.3f);
+    ;
+
     public EnemyShip(BulletPool bulletPool, Rect worldBounds) {
         this.bulletPool = bulletPool;
         this.worldBounds = worldBounds;
@@ -20,6 +23,11 @@ public class EnemyShip extends Ship {
     @Override
     public void update(float delta) {
         super.update(delta);
+        if (getTop() < worldBounds.getTop()) {
+            v.set(v0);
+        } else {
+            reloadTimer = 0.8f * reloadInterval;
+        }
         this.bulletPos.set(pos.x, pos.y - getHalfHeight());
     }
 
@@ -45,6 +53,12 @@ public class EnemyShip extends Ship {
         this.bulletSound = bulletSound;
         setHeightProportion(height);
         this.hp = hp;
-        v.set(v0);
+        v.set(startV);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        reloadTimer = 0f;
     }
 }
