@@ -7,14 +7,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.base.Ship;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.pool.BulletPool;
+import com.mygdx.game.pool.ExplosionPool;
 
 public class EnemyShip extends Ship {
 
     private static final Vector2 startV = new Vector2(0, -0.3f);
-    ;
 
-    public EnemyShip(BulletPool bulletPool, Rect worldBounds) {
+    public EnemyShip(BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
         this.bulletPool = bulletPool;
+        this.explosionPool = explosionPool;
         this.worldBounds = worldBounds;
         this.bulletV = new Vector2();
         this.bulletPos = new Vector2();
@@ -29,6 +30,9 @@ public class EnemyShip extends Ship {
             reloadTimer = 0.8f * reloadInterval;
         }
         this.bulletPos.set(pos.x, pos.y - getHalfHeight());
+        if (getBottom() < worldBounds.getBottom()) {
+            destroy();
+        }
     }
 
     public void set(
@@ -60,5 +64,14 @@ public class EnemyShip extends Ship {
     public void destroy() {
         super.destroy();
         reloadTimer = 0f;
+    }
+
+    public boolean isCollision(Rect rect) {
+        return !(
+                rect.getRight() < getLeft()
+                || rect.getLeft() > getRight()
+                || rect.getBottom() > getTop()
+                || rect.getTop() < pos.y
+                );
     }
 }
