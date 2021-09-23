@@ -7,15 +7,14 @@ import com.badlogic.gdx.math.Vector2;
 
 import com.mygdx.game.base.Ship;
 import com.mygdx.game.math.Rect;
-import com.mygdx.game.pool.BulletPool;
-import com.mygdx.game.pool.ExplosionPool;
+import com.mygdx.game.pool.*;
 
 public class MainShip extends Ship {
 
     private static final float HEIGHT = 0.15f;
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
-    private static final int HP = 1;
+    private static final int HP = 100;
     private static final float RELOAD_INTERVAL = 0.2f;
 
     private boolean pressedLeft;
@@ -39,7 +38,7 @@ public class MainShip extends Ship {
         reloadInterval = RELOAD_INTERVAL;
     }
 
-    public void startNewGame(){
+    public void startNewGame() {
         flushDestroy();
         hp = HP;
         this.pos.x = worldBounds.pos.x;
@@ -48,7 +47,6 @@ public class MainShip extends Ship {
         pressedRight = false;
         leftPointer = INVALID_POINTER;
         rightPointer = INVALID_POINTER;
-
     }
 
     @Override

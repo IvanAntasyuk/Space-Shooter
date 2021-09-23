@@ -1,13 +1,16 @@
 package com.mygdx.game.sprite;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+
 import com.mygdx.game.base.BaseButton;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.screen.GameScreen;
 
 public class NewGameButton extends BaseButton {
+
     private static final float HEIGHT = 0.05f;
-    private static final float TOP_MARGIN = -0.052f;
+    private static final float TOP_MARGIN = -0.012f;
+
     private final GameScreen gameScreen;
 
     public NewGameButton(TextureAtlas atlas, GameScreen gameScreen) {
@@ -16,14 +19,14 @@ public class NewGameButton extends BaseButton {
     }
 
     @Override
-    public void action() {
-        gameScreen.startNewGame();
-    }
-
-    @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         setHeightProportion(HEIGHT);
         setTop(TOP_MARGIN);
+    }
+
+    @Override
+    public void action() {
+        gameScreen.startNewGame();
     }
 }
